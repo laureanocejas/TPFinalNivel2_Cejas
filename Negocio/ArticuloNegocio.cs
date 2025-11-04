@@ -12,6 +12,7 @@ namespace Negocio
     {
         public List<Articulo> Listar()
         {
+            //segundo commit representa todo el trabajo realizado actualmente 
             List<Articulo>lista= new List<Articulo>();
 
             AccesoDatos datos= new AccesoDatos();
