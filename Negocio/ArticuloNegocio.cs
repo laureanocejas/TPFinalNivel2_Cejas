@@ -19,7 +19,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("Select Id, Codigo, Nombre, Descripcion, Precio From ARTICULOS");
+                datos.setearConsulta("Select Id, Codigo, Nombre, Descripcion, ImagenUrl, Precio From ARTICULOS");
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
@@ -29,6 +29,7 @@ namespace Negocio
                     art.Codigo = (string)datos.Lector["Codigo"];
                     art.Nombre = (string)datos.Lector["Nombre"];
                     art.Descripcion = (string)datos.Lector["Descripcion"];
+                    art.ImagenUrl = (string)datos.Lector["ImagenUrl"];
                     art.Precio = (float)(decimal)datos.Lector["Precio"];
 
                     lista.Add(art);

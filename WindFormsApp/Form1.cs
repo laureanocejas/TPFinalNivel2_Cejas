@@ -28,7 +28,28 @@ namespace WindFormsApp
 
             listaArticulos = negocio.Listar();
             dgvArticulos.DataSource = listaArticulos;
+            cargarImagen(listaArticulos[0].ImagenUrl);
+           
 
         }
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.ImagenUrl);
+        }
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxArticulo.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+
+                pbxArticulo.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6FaYTsWGc4kyXzXnnoE4Rrf0jOakkowjuNQWSb2FPfw&s");
+            }
+        }
+
+        
     }
 }
