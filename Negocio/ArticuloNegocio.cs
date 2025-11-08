@@ -19,7 +19,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("Select Id, Codigo, Nombre, Descripcion, ImagenUrl, Precio From ARTICULOS");
+                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl,M.Descripcion AS Marca,C.Descripcion AS Categoria, A.Precio From ARTICULOS A, MARCAS M, CATEGORIAS C Where M.Id=A.IdMarca And C.Id=A.IdCategoria");
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
@@ -30,6 +30,10 @@ namespace Negocio
                     art.Nombre = (string)datos.Lector["Nombre"];
                     art.Descripcion = (string)datos.Lector["Descripcion"];
                     art.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    art.marca=new Marca();
+                    art.marca.Descripcion = (string)datos.Lector["Marca"];
+                    art.categoria = new Categoria();
+                    art.categoria.Descripcion = (string)datos.Lector["Categoria"];
                     art.Precio = (float)(decimal)datos.Lector["Precio"];
 
                     lista.Add(art);

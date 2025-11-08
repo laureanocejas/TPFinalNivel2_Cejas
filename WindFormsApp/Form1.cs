@@ -28,6 +28,7 @@ namespace WindFormsApp
 
             listaArticulos = negocio.Listar();
             dgvArticulos.DataSource = listaArticulos;
+            dgvArticulos.Columns["ImagenUrl"].Visible = false;
             cargarImagen(listaArticulos[0].ImagenUrl);
            
 
