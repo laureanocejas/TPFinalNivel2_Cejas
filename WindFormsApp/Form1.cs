@@ -9,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dominio;
-using Negocio;
+
 
 namespace WindFormsApp
 {
@@ -24,12 +23,22 @@ namespace WindFormsApp
 
         private void FrmArticulos_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio= new ArticuloNegocio();
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
 
-            listaArticulos = negocio.Listar();
-            dgvArticulos.DataSource = listaArticulos;
-            dgvArticulos.Columns["ImagenUrl"].Visible = false;
-            cargarImagen(listaArticulos[0].ImagenUrl);
+                listaArticulos = negocio.Listar();
+                dgvArticulos.DataSource = listaArticulos;
+                dgvArticulos.Columns["ImagenUrl"].Visible = false;
+                cargarImagen(listaArticulos[0].ImagenUrl);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            
            
 
         }
@@ -51,6 +60,10 @@ namespace WindFormsApp
             }
         }
 
-        
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo alta=new frmAltaArticulo();
+            alta.ShowDialog();
+        }
     }
 }

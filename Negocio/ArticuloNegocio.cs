@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -29,7 +30,10 @@ namespace Negocio
                     art.Codigo = (string)datos.Lector["Codigo"];
                     art.Nombre = (string)datos.Lector["Nombre"];
                     art.Descripcion = (string)datos.Lector["Descripcion"];
-                    art.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    if (!(datos.Lector["ImagenUrl"]is DBNull))
+                        art.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    
                     art.marca=new Marca();
                     art.marca.Descripcion = (string)datos.Lector["Marca"];
                     art.categoria = new Categoria();
@@ -48,7 +52,28 @@ namespace Negocio
                 throw ex;
             }
 
+        }
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos= new AccesoDatos();
 
+            try
+            {
+                datos.setearConsulta("Insert Into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,Precio) Values('"+nuevo.Codigo+"','"+nuevo.Nombre+"','"+nuevo.Descripcion+"',@idMarca,@idCategoria,"+nuevo.Precio+")");
+                datos.setearParametro("@idMarca", nuevo.marca.Id);
+                datos.setearParametro("@idCategoria", nuevo.categoria.Id);
+                
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
     }
