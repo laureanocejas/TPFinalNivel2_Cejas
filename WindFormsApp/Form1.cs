@@ -23,6 +23,17 @@ namespace WindFormsApp
 
         private void FrmArticulos_Load(object sender, EventArgs e)
         {
+
+            cargar();
+        }
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.ImagenUrl);
+        }
+
+        private void cargar()
+        {
             try
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
@@ -38,14 +49,6 @@ namespace WindFormsApp
 
                 MessageBox.Show(ex.ToString());
             }
-            
-           
-
-        }
-        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
-        {
-            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.ImagenUrl);
         }
         private void cargarImagen(string imagen)
         {
@@ -64,6 +67,7 @@ namespace WindFormsApp
         {
             frmAltaArticulo alta=new frmAltaArticulo();
             alta.ShowDialog();
+            cargar();
         }
     }
 }
