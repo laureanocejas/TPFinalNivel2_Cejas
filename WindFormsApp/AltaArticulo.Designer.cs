@@ -42,6 +42,10 @@
             this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.lblImagenUrl = new System.Windows.Forms.Label();
+            this.txtImagenUrl = new System.Windows.Forms.TextBox();
+            this.pbxArticulo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCodigo
@@ -55,7 +59,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(152, 31);
+            this.txtCodigo.Location = new System.Drawing.Point(143, 31);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(127, 20);
             this.txtCodigo.TabIndex = 1;
@@ -71,7 +75,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(152, 69);
+            this.txtNombre.Location = new System.Drawing.Point(143, 69);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(127, 20);
             this.txtNombre.TabIndex = 3;
@@ -87,14 +91,14 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(152, 111);
+            this.txtDescripcion.Location = new System.Drawing.Point(143, 114);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(127, 20);
             this.txtDescripcion.TabIndex = 5;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(95, 291);
+            this.btnAceptar.Location = new System.Drawing.Point(73, 315);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 32);
             this.btnAceptar.TabIndex = 6;
@@ -104,7 +108,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(286, 291);
+            this.btnCancelar.Location = new System.Drawing.Point(277, 315);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 32);
             this.btnCancelar.TabIndex = 7;
@@ -115,7 +119,7 @@
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(70, 159);
+            this.lblMarca.Location = new System.Drawing.Point(67, 202);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(37, 13);
             this.lblMarca.TabIndex = 8;
@@ -124,7 +128,7 @@
             // lblCategoria
             // 
             this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(67, 211);
+            this.lblCategoria.Location = new System.Drawing.Point(67, 238);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(52, 13);
             this.lblCategoria.TabIndex = 10;
@@ -133,7 +137,7 @@
             // cbxMarca
             // 
             this.cbxMarca.FormattingEnabled = true;
-            this.cbxMarca.Location = new System.Drawing.Point(152, 156);
+            this.cbxMarca.Location = new System.Drawing.Point(143, 194);
             this.cbxMarca.Name = "cbxMarca";
             this.cbxMarca.Size = new System.Drawing.Size(127, 21);
             this.cbxMarca.TabIndex = 11;
@@ -141,7 +145,7 @@
             // cbxCategoria
             // 
             this.cbxCategoria.FormattingEnabled = true;
-            this.cbxCategoria.Location = new System.Drawing.Point(152, 203);
+            this.cbxCategoria.Location = new System.Drawing.Point(143, 230);
             this.cbxCategoria.Name = "cbxCategoria";
             this.cbxCategoria.Size = new System.Drawing.Size(127, 21);
             this.cbxCategoria.TabIndex = 12;
@@ -149,7 +153,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(67, 255);
+            this.lblPrecio.Location = new System.Drawing.Point(67, 279);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(37, 13);
             this.lblPrecio.TabIndex = 13;
@@ -157,16 +161,45 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(152, 248);
+            this.txtPrecio.Location = new System.Drawing.Point(143, 276);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(127, 20);
             this.txtPrecio.TabIndex = 14;
+            // 
+            // lblImagenUrl
+            // 
+            this.lblImagenUrl.AutoSize = true;
+            this.lblImagenUrl.Location = new System.Drawing.Point(67, 162);
+            this.lblImagenUrl.Name = "lblImagenUrl";
+            this.lblImagenUrl.Size = new System.Drawing.Size(55, 13);
+            this.lblImagenUrl.TabIndex = 15;
+            this.lblImagenUrl.Text = "ImagenUrl";
+            // 
+            // txtImagenUrl
+            // 
+            this.txtImagenUrl.Location = new System.Drawing.Point(143, 155);
+            this.txtImagenUrl.Name = "txtImagenUrl";
+            this.txtImagenUrl.Size = new System.Drawing.Size(127, 20);
+            this.txtImagenUrl.TabIndex = 16;
+            this.txtImagenUrl.Leave += new System.EventHandler(this.txtImagenUrl_Leave);
+            // 
+            // pbxArticulo
+            // 
+            this.pbxArticulo.Location = new System.Drawing.Point(437, 72);
+            this.pbxArticulo.Name = "pbxArticulo";
+            this.pbxArticulo.Size = new System.Drawing.Size(235, 179);
+            this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxArticulo.TabIndex = 17;
+            this.pbxArticulo.TabStop = false;
             // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pbxArticulo);
+            this.Controls.Add(this.txtImagenUrl);
+            this.Controls.Add(this.lblImagenUrl);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.cbxCategoria);
@@ -185,6 +218,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AltaArticulo";
             this.Load += new System.EventHandler(this.frmAltaArticulo_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,5 +240,8 @@
         private System.Windows.Forms.ComboBox cbxCategoria;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Label lblImagenUrl;
+        private System.Windows.Forms.TextBox txtImagenUrl;
+        private System.Windows.Forms.PictureBox pbxArticulo;
     }
 }

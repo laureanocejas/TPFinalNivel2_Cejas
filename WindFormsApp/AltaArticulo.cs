@@ -36,6 +36,7 @@ namespace WindFormsApp
                 article.Descripcion = txtDescripcion.Text;
                 article.marca = (Marca)cbxMarca.SelectedItem;
                 article.categoria = (Categoria)cbxCategoria.SelectedItem;
+                article.ImagenUrl= txtImagenUrl.Text;
                 article.Precio =float.Parse(txtPrecio.Text);
 
                 negocio.agregar(article);
@@ -68,5 +69,25 @@ namespace WindFormsApp
             }
 
         }
+        private void txtImagenUrl_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtImagenUrl.Text);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxArticulo.Load(imagen);
+                
+            }
+            catch (Exception ex)
+            {
+                pbxArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+
+            }
+        }
+
+        
     }
 }
