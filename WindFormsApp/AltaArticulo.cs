@@ -12,11 +12,19 @@ using System.Windows.Forms;
 
 namespace WindFormsApp
 {
+    
     public partial class frmAltaArticulo : Form
     {
+        private Articulo articulo=null;
         public frmAltaArticulo()
         {
             InitializeComponent();
+        }
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Articulo";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -26,21 +34,34 @@ namespace WindFormsApp
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo article = new Articulo();
+            //Articulo article = new Articulo();
             ArticuloNegocio negocio= new ArticuloNegocio();
 
             try
             {
-                article.Codigo = txtCodigo.Text;
-                article.Nombre = txtNombre.Text;
-                article.Descripcion = txtDescripcion.Text;
-                article.marca = (Marca)cbxMarca.SelectedItem;
-                article.categoria = (Categoria)cbxCategoria.SelectedItem;
-                article.ImagenUrl= txtImagenUrl.Text;
-                article.Precio =float.Parse(txtPrecio.Text);
+                if(articulo==null)
+                    articulo=new Articulo();
 
-                negocio.agregar(article);
-                MessageBox.Show("Agregado exitosamente");
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.marca = (Marca)cbxMarca.SelectedItem;
+                articulo.categoria = (Categoria)cbxCategoria.SelectedItem;
+                articulo.ImagenUrl= txtImagenUrl.Text;
+                articulo.Precio =float.Parse(txtPrecio.Text);
+
+                if(articulo.Id!=0)
+                {
+                    negocio.modificar(articulo);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    negocio.agregar(articulo);
+                    MessageBox.Show("Agregado exitosamente");
+                }
+        
+                
                 Close();
 
             }
@@ -59,7 +80,23 @@ namespace WindFormsApp
             try
             {
                 cbxMarca.DataSource = marcaNegocio.listar();
+                cbxMarca.ValueMember = "Id";
+                cbxMarca.DisplayMember = "Descripcion";
                 cbxCategoria.DataSource = categoriaNegocio.listar();
+                cbxCategoria.ValueMember = "Id";
+                cbxCategoria.DisplayMember = "Descripcion";
+               
+                if(articulo!=null)
+                {
+                    txtCodigo.Text = articulo.Codigo;
+                    txtNombre.Text= articulo.Nombre;
+                    txtDescripcion.Text= articulo.Descripcion;
+                    txtImagenUrl.Text= articulo.ImagenUrl;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cargarImagen(articulo.ImagenUrl);
+                    cbxMarca.SelectedValue = articulo.marca.Id;
+                    cbxCategoria.SelectedValue=articulo.categoria.Id;
+                }
 
             }
             catch (Exception ex)

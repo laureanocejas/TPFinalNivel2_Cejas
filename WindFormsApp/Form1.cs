@@ -20,6 +20,7 @@ namespace WindFormsApp
         {
             InitializeComponent();
         }
+        
 
         private void FrmArticulos_Load(object sender, EventArgs e)
         {
@@ -41,6 +42,7 @@ namespace WindFormsApp
                 listaArticulos = negocio.Listar();
                 dgvArticulos.DataSource = listaArticulos;
                 dgvArticulos.Columns["ImagenUrl"].Visible = false;
+                dgvArticulos.Columns["Id"].Visible = false;
                 cargarImagen(listaArticulos[0].ImagenUrl);
 
             }
@@ -68,6 +70,21 @@ namespace WindFormsApp
             frmAltaArticulo alta=new frmAltaArticulo();
             alta.ShowDialog();
             cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificar= new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargar();
+
+        }
+
+        private void dgvArticulos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
