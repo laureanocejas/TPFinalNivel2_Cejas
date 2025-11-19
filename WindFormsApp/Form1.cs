@@ -114,12 +114,61 @@ namespace WindFormsApp
             }
         }
 
+        private bool validarFiltro()
+        {
+            if (cbxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor seleccione el campo para filtrar");
+                return true;
+
+            }
+            
+            if(cbxCriterio.SelectedIndex<0)
+            {
+                MessageBox.Show("Por favor seleccione el criterio para filtrar");
+                return true;
+            }
+            if (cbxCampo.SelectedItem.ToString() == "Id")
+            {
+                if(string.IsNullOrEmpty(txtFiltro.Text))
+                {
+                    MessageBox.Show("Debes cargar el filtro para numerico");
+                    return true;
+                }
+                if(!(soloNumero(txtFiltro.Text)))
+                    {
+                    MessageBox.Show("Solo numeros por favor");
+                    return true;
+                    }
+            }
+
+            return false;
+        }
+
+        private bool soloNumero(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                    return false;
+            }
+            return true;
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio=new ArticuloNegocio();
+            if (cbxCampo.SelectedIndex < 0 && cbxCriterio.SelectedIndex < 0 && string.IsNullOrWhiteSpace(txtFiltro.Text))
+            {
+                cargar(); // vuelve a llenar la grilla con todo
+                return;
+            }
 
             try
             {
+                if (validarFiltro())
+                    return;
+
                 string campo = cbxCampo.SelectedItem.ToString();
                 string criterio = cbxCriterio.SelectedItem.ToString();
                 string filtro=txtFiltro.Text;
@@ -135,8 +184,17 @@ namespace WindFormsApp
 
         private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbxCampo.SelectedIndex < 0 || cbxCampo.SelectedItem == null)
+            {
+                cbxCriterio.Items.Clear();
+                return;
+            }
+               
+
             string opcion = cbxCampo.SelectedItem.ToString();
-            if(opcion=="Id")
+
+
+            if (opcion=="Id")
             {
                 cbxCriterio.Items.Clear();
                 cbxCriterio.Items.Add("Mayor a");
@@ -152,6 +210,18 @@ namespace WindFormsApp
             }
         }
 
-       
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cbxCampo.SelectedIndex = -1;
+            cbxCriterio.SelectedIndex = -1;
+            txtFiltro.Clear();
+
+            cargar();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
