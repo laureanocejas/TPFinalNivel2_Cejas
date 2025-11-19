@@ -26,6 +26,10 @@ namespace WindFormsApp
         {
 
             cargar();
+            cbxCampo.Items.Add("Id");
+            cbxCampo.Items.Add("Nombre");
+            cbxCampo.Items.Add("Descripcion");
+            
         }
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
@@ -109,5 +113,45 @@ namespace WindFormsApp
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio=new ArticuloNegocio();
+
+            try
+            {
+                string campo = cbxCampo.SelectedItem.ToString();
+                string criterio = cbxCriterio.SelectedItem.ToString();
+                string filtro=txtFiltro.Text;
+                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cbxCampo.SelectedItem.ToString();
+            if(opcion=="Id")
+            {
+                cbxCriterio.Items.Clear();
+                cbxCriterio.Items.Add("Mayor a");
+                cbxCriterio.Items.Add("Menor a");
+                cbxCriterio.Items.Add("Igual a");
+
+            }else
+            {
+                cbxCriterio.Items.Clear();
+                cbxCriterio.Items.Add("Comienza con");
+                cbxCriterio.Items.Add("Termina con");
+                cbxCriterio.Items.Add("Contiene");
+            }
+        }
+
+       
     }
 }
